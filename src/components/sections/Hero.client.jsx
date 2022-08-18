@@ -22,15 +22,15 @@ export function Hero({
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
-    // const tl = gsap.timeline();
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: heroRef,
-        start: 'top top',
-        pin: true,
-        pinSpacing: false,
-      },
-    });
+    const tl = gsap.timeline();
+    // const tl = gsap.timeline({
+    //   scrollTrigger: {
+    //     trigger: heroRef,
+    //     start: 'top top',
+    //     pin: true,
+    //     pinSpacing: false,
+    //   },
+    // });
     tl.to(textRef, {
       y: '+=200',
     });
