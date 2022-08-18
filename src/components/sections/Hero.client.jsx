@@ -1,10 +1,10 @@
-import { useEffect, useRef } from 'react';
-import { Image, Link, Video } from '@shopify/hydrogen';
+import {useEffect, useRef} from 'react';
+import {Image, Link, Video} from '@shopify/hydrogen';
 
-import { Heading, Text } from '~/components';
+import {Heading, Text} from '~/components';
 
-import { gsap } from 'gsap/dist/gsap';
-import { ScrollTrigger } from 'gsap/dist/ScrollTrigger.js';
+import {gsap} from 'gsap/dist/gsap';
+import {ScrollTrigger} from 'gsap/dist/ScrollTrigger';
 
 export function Hero({
   byline,
@@ -17,7 +17,6 @@ export function Hero({
   spreadSecondary,
   top,
 }) {
-  const heroRef = useRef(null);
   const textRef = useRef(null);
 
   useEffect(() => {
@@ -25,19 +24,20 @@ export function Hero({
     // const tl = gsap.timeline();
     const tl = gsap.timeline({
       scrollTrigger: {
-        trigger: heroRef,
+        trigger: '#intro',
         start: 'top top',
-        pin: true,
-        pinSpacing: false,
+        end: 'bottom top',
+        scrub: true,
+        markers: true,
       },
     });
-    tl.to(textRef, {
-      y: '+=200',
+    tl.to('#heroText', {
+      y: '-=100',
     });
   }, []);
 
   return (
-    <div ref={heroRef}>
+    <div id="intro">
       <Link to={`/collections/${handle}`}>
         <section
           className={`relative justify-end flex flex-col w-full ${
@@ -81,20 +81,21 @@ export function Hero({
             )}
           </div>
           <div
-            ref={textRef}
             className="flex flex-col items-baseline justify-between gap-4 px-6 py-8 sm:px-8 md:px-12 bg-gradient-to-t dark:from-contrast/60 dark:text-primary from-primary/60 text-contrast"
           >
-            {heading?.value && (
-              <Heading format as="h2" size="display" className="max-w-md">
-                {heading.value}
-              </Heading>
-            )}
-            {byline?.value && (
-              <Text format width="narrow" as="p" size="lead">
-                {byline.value}
-              </Text>
-            )}
-            {cta?.value && <Text size="lead">{cta.value}</Text>}
+            <div id="heroText" ref={textRef} >
+              {heading?.value && (
+                <Heading format as="h2" size="display" className="max-w-md">
+                  {heading.value}
+                </Heading>
+              )}
+              {byline?.value && (
+                <Text format width="narrow" as="p" size="lead">
+                  {byline.value}
+                </Text>
+              )}
+              {cta?.value && <Text size="lead">{cta.value}</Text>}
+            </div>
           </div>
         </section>
       </Link>
