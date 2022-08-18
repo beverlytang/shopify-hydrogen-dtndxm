@@ -11,7 +11,7 @@ import {
 
 import {MEDIA_FRAGMENT, PRODUCT_CARD_FRAGMENT} from '~/lib/fragments';
 import {getHeroPlaceholder} from '~/lib/placeholders';
-import {FeaturedCollections, Hero} from '~/components';
+import {FeaturedCollections, HeroLazy} from '~/components';
 import {Layout, ProductSwimlane} from '~/components/index.server';
 
 export default function Homepage() {
@@ -58,19 +58,21 @@ function HomepageContent() {
   return (
     <>
       {primaryHero && (
-        <Hero {...primaryHero} height="full" top loading="eager" />
+        <Suspense>
+          <HeroLazy {...primaryHero} height="full" top loading="eager" />
+        </Suspense>
       )}
       <ProductSwimlane
         data={featuredProducts.nodes}
         title="Featured Products"
         divider="bottom"
       />
-      {secondaryHero && <Hero {...secondaryHero} />}
+      {secondaryHero && <HeroLazy {...secondaryHero} />}
       <FeaturedCollections
         data={featuredCollections.nodes}
         title="Collections"
       />
-      {tertiaryHero && <Hero {...tertiaryHero} />}
+      {tertiaryHero && <HeroLazy {...tertiaryHero} />}
     </>
   );
 }
