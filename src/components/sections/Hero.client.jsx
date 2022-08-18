@@ -20,6 +20,7 @@ export function Hero({
   const textRef = useRef(null);
 
   useEffect(() => {
+    console.log('gsap is running now!');
     gsap.registerPlugin(ScrollTrigger);
     // const tl = gsap.timeline();
     const tl = gsap.timeline({
@@ -80,9 +81,7 @@ export function Hero({
               </div>
             )}
           </div>
-          <div
-            className="flex flex-col items-baseline justify-between gap-4 px-6 py-8 sm:px-8 md:px-12 bg-gradient-to-t dark:from-contrast/60 dark:text-primary from-primary/60 text-contrast"
-          >
+          <div className="flex flex-col items-baseline justify-between gap-4 px-6 py-8 sm:px-8 md:px-12 bg-gradient-to-t dark:from-contrast/60 dark:text-primary from-primary/60 text-contrast">
             <div id="heroText" ref={textRef}>
               {heading?.value && (
                 <Heading format as="h2" size="display" className="max-w-md">
@@ -103,11 +102,11 @@ export function Hero({
   );
 }
 
-function SpreadMedia({ data, loading, scale, sizes, width, widths }) {
+function SpreadMedia({data, loading, scale, sizes, width, widths}) {
   if (data.mediaContentType === 'VIDEO') {
     return (
       <Video
-        previewImageOptions={{ scale, src: data.previewImage.url }}
+        previewImageOptions={{scale, src: data.previewImage.url}}
         width={scale * width}
         className="block object-cover w-full h-full"
         data={data}
@@ -131,7 +130,7 @@ function SpreadMedia({ data, loading, scale, sizes, width, widths }) {
         data={data.image}
         loading={loading}
         width={width}
-        loaderOptions={{ scale, crop: 'center' }}
+        loaderOptions={{scale, crop: 'center'}}
       />
     );
   }
